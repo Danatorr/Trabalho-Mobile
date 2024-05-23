@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trabalho_mobile/components/movie_card.dart';
+import 'package:trabalho_mobile/screens/add_screen.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -25,21 +26,21 @@ class _ListScreenState extends State<ListScreen> {
                   barrierDismissible: true,
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                        title: Text("Equipe"),
-                        content: const Text(
-                            "Daniel de Araújo Torres\n José Gabriel Gouveia \n Kildere Maravilha \n Rafael Leão \n Vinícius Sobral de Lima"),
-                        actions: [
-                          ElevatedButton(
-                            child: Text("Ok"),
-                            onPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        ],
-                      ));
+                    title: Text("Equipe"),
+                    content: const Text(
+                        "Daniel de Araújo Torres\n José Gabriel Gouveia \n Kildere Maravilha \n Rafael Leão \n Vinícius Sobral de Lima"),
+                    actions: [
+                      ElevatedButton(
+                        child: Text("Ok"),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    ],
+                  ));
             },
             style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+              backgroundColor: MaterialStatePropertyAll(Colors.transparent),
             ),
             child: Icon(
               Icons.info_rounded,
@@ -57,7 +58,12 @@ class _ListScreenState extends State<ListScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddScreen()),
+          );
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         tooltip: 'Increment',
         shape: CircleBorder(),
@@ -67,6 +73,5 @@ class _ListScreenState extends State<ListScreen> {
         ),
       ),
     );
-    ;
   }
 }
