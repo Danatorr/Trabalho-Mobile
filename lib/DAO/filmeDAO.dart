@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, avoid_function_literals_in_foreach_calls, curly_braces_in_flow_control_structures
 
-import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:trabalho_mobile/database/connection.dart';
 import 'package:trabalho_mobile/model/filme.dart';
@@ -17,7 +16,7 @@ class FilmeDAO {
     await con.query(
       Connection.tableName,
       where: "id = $id"
-    ).then((queryList) => filme = queryList.isNotEmpty? Filme.ofMap(queryList[0]) : null);
+    ).then((queryList) => filme = queryList.isNotEmpty? Filme.fromMap(queryList[0]) : null);
 
     return filme;
   }
@@ -28,7 +27,7 @@ class FilmeDAO {
 
     await con.query(
       Connection.tableName
-    ).then((queryList) => queryList.forEach((filme) => filmes.add(Filme.ofMap(filme))));
+    ).then((queryList) => queryList.forEach((filme) => filmes.add(Filme.fromMap(filme))));
 
     return filmes;
   }

@@ -11,7 +11,7 @@ class Filme {
 
 	Filme(this.nome, this.tempoMin, this.generos, {this.id, this.avaliacao = 0, this.imageURL});
 
-	Filme.ofMap(Map<String, Object?> ct) {
+	Filme.fromMap(Map<String, Object?> ct) {
 		id = ct["id"] as int?;
 		nome = ct["nome"] as String;
 		tempoMin = ct["tempoMin"] as int;
