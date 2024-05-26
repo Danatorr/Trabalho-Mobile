@@ -35,6 +35,7 @@ Execute o comando abaixo dentro da pasta do projeto:
 
 ```
 flutter pub get
+flutter create --platforms android .
 ```
 
 
