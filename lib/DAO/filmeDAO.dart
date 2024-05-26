@@ -43,8 +43,7 @@ class FilmeDAO {
     if(await find(filme.id) == null)
       return await con.insert(Connection.tableName, filmeMap);
     
-    filmeMap["id"] = filme.id;
-    return await con.update(Connection.tableName, filmeMap);
+    return await con.update(Connection.tableName, filmeMap, where: "id = ${filme.id}");
   }
   
   Future<void> delete(int? id) async {
