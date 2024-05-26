@@ -4,28 +4,37 @@ class Filme {
 	
 	late int? id;
 	late String nome;
+	late int? ano;
 	late int tempoMin;
 	late String generos;
+	late int faixa_etaria;
 	late int avaliacao;
+	late String? descricao;
 	late String? imageURL;
 
-	Filme(this.nome, this.tempoMin, this.generos, {this.id, this.avaliacao = 0, this.imageURL});
+	Filme(this.nome, this.tempoMin, this.generos, {this.id, this.ano, this.faixa_etaria = 0, this.avaliacao = 0, this.descricao, this.imageURL});
 
 	Filme.fromMap(Map<String, Object?> ct) {
 		id = ct["id"] as int?;
 		nome = ct["nome"] as String;
+		ano = ct["ano"] as int?;
 		tempoMin = ct["tempoMin"] as int;
 		generos = ct["generos"] as String;
-		avaliacao = ct["avaliacao"] as int;
+		faixa_etaria = ct["faixa_etaria"] != null? ct["faixa_etaria"] as int : 0;
+		avaliacao = ct["avaliacao"] != null? ct["avaliacao"] as int : 0;
+		descricao = ct["descricao"] as String?;
 		imageURL = ct["imageURL"] as String?;
 	}
 
   Map<String, Object?> getMap() => {
     "id": id,
     "nome": nome,
+    "ano": ano,
     "tempoMin": tempoMin,
     "generos": generos,
+    "faixa_etaria": faixa_etaria,
     "avaliacao": avaliacao,
+    "descricao": descricao,
     "imageURL": imageURL
   };
 

@@ -11,9 +11,12 @@ class Connection {
 			CREATE TABLE $tableName(
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				nome TEXT,
+        ano INT,
 				tempoMin INT,
 				generos TEXT,
+        faixa_etaria int,
 				avaliacao INT,
+        descricao TEXT,
 				imageURL TEXT
 			)
 		""";
