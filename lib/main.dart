@@ -10,13 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData ourTheme = ThemeData.dark().copyWith(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+      useMaterial3: true,
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Filmes',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-        useMaterial3: true,
-      ),
+      theme: ourTheme,
       home: const MyHomePage(),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:trabalho_mobile/DAO/filmeDAO.dart';
+import 'package:trabalho_mobile/model/filme.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -17,6 +19,8 @@ class _AddScreenState extends State<AddScreen> {
   final TextEditingController descricaoController = TextEditingController();
   double _rating = 3.0;
   String dropdownValue = 'Livre';
+
+  final FilmeDAO dao = FilmeDAO();
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +128,9 @@ class _AddScreenState extends State<AddScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          Filme filme_atual = Filme(tituloController.text, int.parse(duracaoController.text), generoController.text);
+          await dao.save(filme_atual);
           Navigator.pop(context);
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
