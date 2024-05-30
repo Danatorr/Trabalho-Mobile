@@ -38,4 +38,14 @@ class Filme {
     "imageURL": imageURL
   };
 
+	// Getters for each attribute
+	int? get getId => id;
+	String get getNome => nome;
+	int? get getAno => ano;
+	int get getTempoMin => tempoMin;
+	String get getGeneros => generos;
+	int get getFaixaEtaria => faixa_etaria;
+	int get getAvaliacao => avaliacao;
+	String? get getDescricao => descricao;
+	String? get getImageURL => imageURL;
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../model/filme.dart';
+
 class MovieCard extends StatefulWidget {
-  const MovieCard({super.key});
+  final Filme filme;
+
+  const MovieCard({super.key, required this.filme});
 
   @override
   State<MovieCard> createState() => _MovieCardState();
@@ -33,8 +37,8 @@ class _MovieCardState extends State<MovieCard> {
               leading: Image.network(
                   "https://i.scdn.co/image/ab67616d0000b273787dd8343545025252cf3f22"),
               isThreeLine: true,
-              title: const Text("Teste Nome Filme"),
-              subtitle: const Text("Teste Descrição Filme"),
+              title: Text(widget.filme.nome),
+              subtitle: Text("teste descricao"),
             ),
             RatingBar.builder(
               initialRating: _rating,
