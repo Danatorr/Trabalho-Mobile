@@ -36,10 +36,10 @@ class _MovieCardState extends State<MovieCard> {
           children: [
             ListTile(
               leading: Image.network(
-                  "https://i.scdn.co/image/ab67616d0000b273787dd8343545025252cf3f22"),
+                  widget.filme.imageURL ?? "https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"),
               isThreeLine: true,
               title: Text(widget.filme.nome),
-              subtitle: Text("teste descricao"),
+              subtitle: Text(widget.filme.descricao ?? "Sem descrição"),
               onTap: () => _mostrarOpcoes(context),
             ),
             RatingBar.builder(
@@ -125,7 +125,7 @@ class ExibirDadosPage extends StatelessWidget {
           children: <Widget>[
             Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
             SizedBox(height: 10),
-            Text('Descrição: teste descricao'),
+            Text('Descrição: ${filme.descricao ?? "Sem descrição"}', style: TextStyle(fontSize: 16)),
             // Adicione outros detalhes do filme aqui
           ],
         ),

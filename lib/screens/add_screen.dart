@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:trabalho_mobile/DAO/filmeDAO.dart';
-import 'package:trabalho_mobile/model/filme.dart';
+import '../DAO/filmeDAO.dart';
+import '../model/filme.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -35,9 +35,7 @@ class _AddScreenState extends State<AddScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               TextFormField(
                 controller: urlController,
@@ -129,11 +127,23 @@ class _AddScreenState extends State<AddScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Filme filme_atual = Filme(tituloController.text, int.parse(duracaoController.text), generoController.text);
-          await dao.save(filme_atual);
-          Navigator.pop(context);
+          if (_validateInputs()) {
+            Filme filme_atual = Filme(
+              tituloController.text,
+              int.parse(duracaoController.text),
+              generoController.text,
+              ano: int.tryParse(anoController.text),
+              faixa_etaria: _ConverterFaixaEtaria(dropdownValue),
+              avaliacao: _rating.toInt(),
+              descricao: descricaoController.text,
+              imageURL: urlController.text,
+            );
+            await dao.save(filme_atual);
+            Navigator.pop(context);
+          }
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
+        tooltip: 'Salvar',
         shape: CircleBorder(),
         child: const Icon(
           Icons.save,
@@ -141,5 +151,34 @@ class _AddScreenState extends State<AddScreen> {
         ),
       ),
     );
+  }
+
+  bool _validateInputs() {
+    if (tituloController.text.isEmpty ||
+        generoController.text.isEmpty ||
+        duracaoController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Por favor, preencha todos os campos obrigatórios')),
+      );
+      return false;
+    }
+    return true;
+  }
+
+  int _ConverterFaixaEtaria(String value) {
+    switch (value) {
+      case '10':
+        return 10;
+      case '12':
+        return 12;
+      case '14':
+        return 14;
+      case '16':
+        return 16;
+      case '18':
+        return 18;
+      default:
+        return 0;
+    }
   }
 }
