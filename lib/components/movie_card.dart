@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:trabalho_mobile/DAO/filmeDAO.dart';
+import 'package:trabalho_mobile/screens/add_screen.dart';
 import '../model/filme.dart';
 
 class MovieCard extends StatefulWidget {
@@ -101,7 +104,7 @@ class _MovieCardState extends State<MovieCard> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AlterarFilmePage(filme: widget.filme),
+                    builder: (context) => AddScreen(filme: widget.filme),
                   ),
                 );
               },
@@ -130,29 +133,38 @@ class ExibirDadosPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
+            
+            SizedBox(height: 10),
+            Text(filme.generos, style: TextStyle(fontSize: 16)),
+            
+            SizedBox(height: 10),
+            Text('${filme.ano}', style: TextStyle(fontSize: 16)),
+            
+            SizedBox(height: 10),
+            Text('Duração: ${filme.tempoMin}', style: TextStyle(fontSize: 16)),
+            
+            SizedBox(height: 10),
+            Text('Restrição: ${filme.faixa_etaria}', style: TextStyle(fontSize: 16)),
+            
+            RatingBar.builder(
+              initialRating: filme.avaliacao,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {},
+            ),
+
             SizedBox(height: 10),
             Text('Descrição: ${filme.descricao ?? "Sem descrição"}', style: TextStyle(fontSize: 16)),
             // Adicione outros detalhes do filme aqui
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AlterarFilmePage extends StatelessWidget {
-  final Filme filme;
-
-  AlterarFilmePage({required this.filme});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Alterar Filme'),
-      ),
-      body: Center(
-        child: Text('Página para alterar o filme ${filme.nome}'),
       ),
     );
   }
