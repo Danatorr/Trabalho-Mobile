@@ -134,7 +134,7 @@ class _AddScreenState extends State<AddScreen> {
                 generoController.text,
                 ano: int.tryParse(anoController.text),
                 faixa_etaria: _ConverterFaixaEtaria(dropdownValue),
-                avaliacao: _rating.toInt(),
+                avaliacao: _rating,
                 descricao: descricaoController.text,
                 imageURL: urlController.text,
               );

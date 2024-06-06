@@ -5,7 +5,7 @@ class Filme {
 	late int tempoMin;
 	late String generos;
 	late int faixa_etaria;
-	late int avaliacao;
+	late double avaliacao;
 	late String? descricao;
 	late String? imageURL;
 
@@ -19,7 +19,7 @@ class Filme {
 		tempoMin = ct["tempoMin"] as int;
 		generos = ct["generos"] as String;
 		faixa_etaria = ct["faixa_etaria"] != null ? ct["faixa_etaria"] as int : 0;
-		avaliacao = ct["avaliacao"] != null ? ct["avaliacao"] as int : 0;
+		avaliacao = ct["avaliacao"] != null ? ct["avaliacao"] as double : 0;
 		descricao = ct["descricao"] as String?;
 		imageURL = ct["imageURL"] as String?;
 	}
@@ -42,7 +42,7 @@ class Filme {
 	int get getTempoMin => tempoMin;
 	String get getGeneros => generos;
 	int get getFaixaEtaria => faixa_etaria;
-	int get getAvaliacao => avaliacao;
+	double get getAvaliacao => avaliacao;
 	String? get getDescricao => descricao;
 	String? get getImageURL => imageURL;
 }

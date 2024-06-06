@@ -17,6 +17,8 @@ class _MovieCardState extends State<MovieCard> {
 
   @override
   Widget build(BuildContext context) {
+    _rating = widget.filme.avaliacao;
+
     return Dismissible(
       onDismissed: (direction) {
         FilmeDAO().delete(widget.filme.id);

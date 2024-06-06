@@ -26,6 +26,10 @@ class Connection {
 
         return openDatabase(path, onCreate: (db, version) {
             db.execute(createTbFilmes);
-        }, version: 1);
+        }, 
+        //onOpen: (db) => {
+        //  db.delete(tableName)
+        //},
+        version: 1);
     }
 }
