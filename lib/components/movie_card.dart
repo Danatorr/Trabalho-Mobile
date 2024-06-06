@@ -133,52 +133,59 @@ class ExibirDadosPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Detalhes do Filme'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.all(15.0),
           children: <Widget>[
-            SizedBox(height: 10),
-            Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
-            Image.network(
-              filme.imageURL ?? "",
-              fit: BoxFit.contain,
-              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                return Image.network("https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", fit: BoxFit.cover, width: 150);
-              }
-            ),
-            SizedBox(height: 10),
-            Text(filme.generos, style: TextStyle(fontSize: 16)),
-            
-            SizedBox(height: 10),
-            Text('${filme.ano}', style: TextStyle(fontSize: 16)),
-            
-            SizedBox(height: 10),
-            Text('Duração: ${filme.tempoMin}', style: TextStyle(fontSize: 16)),
-            
-            SizedBox(height: 10),
-            Text('Restrição: ${filme.faixa_etaria}', style: TextStyle(fontSize: 16)),
-            
-            RatingBar.builder(
-              initialRating: filme.avaliacao,
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => const Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {},
-            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
+                  Image.network(
+                    filme.imageURL ?? "",
+                    fit: BoxFit.contain,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return Image.network("https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", fit: BoxFit.cover, width: 150);
+                    }
+                  ),
+                  SizedBox(height: 10),
+                  Text(filme.generos, style: TextStyle(fontSize: 16)),
+                  
+                  SizedBox(height: 10),
+                  Text('${filme.ano}', style: TextStyle(fontSize: 16)),
+                  
+                  SizedBox(height: 10),
+                  Text('Duração: ${filme.tempoMin}', style: TextStyle(fontSize: 16)),
+                  
+                  SizedBox(height: 10),
+                  Text('Restrição: ${filme.faixa_etaria}', style: TextStyle(fontSize: 16)),
+                  
+                  RatingBar.builder(
+                    initialRating: filme.avaliacao,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {},
+                  ),
 
-            SizedBox(height: 10),
-            Text('Descrição: ${filme.descricao ?? "Sem descrição"}', style: TextStyle(fontSize: 16)),
-            // Adicione outros detalhes do filme aqui
-          ],
-        ),
-      ),
+                  SizedBox(height: 10),
+                  Text('Descrição: ${filme.descricao ?? "Sem descrição"}', style: TextStyle(fontSize: 16)),
+                  // Adicione outros detalhes do filme aqui
+                ],
+              ),
+            ),
+          ]
+        )
+      )
     );
   }
 }
