@@ -4,7 +4,9 @@ import '../DAO/filmeDAO.dart';
 import '../model/filme.dart';
 
 class AddScreen extends StatefulWidget {
-  const AddScreen({super.key});
+  final Filme? filme;
+
+  const AddScreen({super.key, this.filme});
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -17,18 +19,34 @@ class _AddScreenState extends State<AddScreen> {
   final TextEditingController duracaoController = TextEditingController();
   final TextEditingController anoController = TextEditingController();
   final TextEditingController descricaoController = TextEditingController();
-  double _rating = 3.0;
-  String dropdownValue = 'Livre';
+  double avaliacao = 3.0;
+  String faixaEtaria = 'Livre';
+
+  String title = 'Cadastrar Filmes';
 
   final FilmeDAO dao = FilmeDAO();
 
   @override
   Widget build(BuildContext context) {
+
+    if(widget.filme != null) {
+      title = 'Editar Filme';
+
+      tituloController.text = widget.filme!.nome;
+      anoController.text = "${widget.filme!.ano}";
+      duracaoController.text = "${widget.filme!.tempoMin}";
+      generoController.text = widget.filme!.generos;
+      faixaEtaria = "${widget.filme?.faixa_etaria}";
+      avaliacao = widget.filme!.avaliacao;
+      descricaoController.text = widget.filme!.descricao!;
+      urlController.text = widget.filme!.imageURL!;
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "Cadastrar Filmes",
+          title,
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -62,10 +80,10 @@ class _AddScreenState extends State<AddScreen> {
                     style: TextStyle(fontSize: 16),
                   ),
                   DropdownButton<String>(
-                    value: dropdownValue,
+                    value: faixaEtaria,
                     onChanged: (String? newValue) {
                       setState(() {
-                        dropdownValue = newValue!;
+                        faixaEtaria = newValue!;
                       });
                     },
                     items: <String>['Livre', '10', '12', '14', '16', '18']
@@ -89,7 +107,7 @@ class _AddScreenState extends State<AddScreen> {
                 children: [
                   Text("Nota:"),
                   RatingBar.builder(
-                    initialRating: _rating,
+                    initialRating: avaliacao,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -101,7 +119,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                     onRatingUpdate: (rating) {
                       setState(() {
-                        _rating = rating;
+                        avaliacao = rating;
                       });
                     },
                   )
@@ -129,12 +147,13 @@ class _AddScreenState extends State<AddScreen> {
         onPressed: () async {
             if (_validateInputs()) {
               Filme filme_atual = Filme(
+                id: widget.filme?.id,
                 tituloController.text,
                 int.parse(duracaoController.text),
                 generoController.text,
                 ano: int.tryParse(anoController.text),
-                faixa_etaria: _ConverterFaixaEtaria(dropdownValue),
-                avaliacao: _rating,
+                faixa_etaria: _ConverterFaixaEtaria(faixaEtaria),
+                avaliacao: avaliacao,
                 descricao: descricaoController.text,
                 imageURL: urlController.text,
               );

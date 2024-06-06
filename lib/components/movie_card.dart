@@ -45,7 +45,13 @@ class _MovieCardState extends State<MovieCard> {
           children: [
             ListTile(
               leading: Image.network(
-                  widget.filme.imageURL ?? "https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"),
+                widget.filme.imageURL ?? "",
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return Image.network(
+                    "https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", 
+                  );
+                }
+              ),
               isThreeLine: true,
               title: Text(widget.filme.nome),
               subtitle: Text(widget.filme.descricao ?? "Sem descrição"),
@@ -98,15 +104,15 @@ class _MovieCardState extends State<MovieCard> {
             ListTile(
               leading: Icon(Icons.edit),
               title: Text('Alterar'),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                // Navegar para a tela de alteração
-                Navigator.push(
+
+                await Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => AddScreen(filme: widget.filme),
-                  ),
+                  MaterialPageRoute(builder: (context) => AddScreen(filme: widget.filme)),
                 );
+
+                setState(() {});
               },
             ),
           ],
@@ -132,8 +138,15 @@ class ExibirDadosPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 10),
             Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
-            
+            Image.network(
+              filme.imageURL ?? "",
+              fit: BoxFit.contain,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return Image.network("https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", fit: BoxFit.cover, width: 150);
+              }
+            ),
             SizedBox(height: 10),
             Text(filme.generos, style: TextStyle(fontSize: 16)),
             
