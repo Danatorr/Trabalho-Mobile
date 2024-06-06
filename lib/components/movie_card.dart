@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:trabalho_mobile/DAO/filmeDAO.dart';
 import '../model/filme.dart';
 
 class MovieCard extends StatefulWidget {
@@ -17,6 +18,9 @@ class _MovieCardState extends State<MovieCard> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
+      onDismissed: (direction) {
+        FilmeDAO().delete(widget.filme.id);
+      },
       key: UniqueKey(),
       direction: DismissDirection.endToStart,
       background: Container(

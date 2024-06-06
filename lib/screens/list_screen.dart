@@ -103,11 +103,12 @@ class _ListScreenState extends State<ListScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddScreen()),
           );
+          setState(() {});
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         tooltip: 'Adicionar Filme',

@@ -127,20 +127,22 @@ class _AddScreenState extends State<AddScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          if (_validateInputs()) {
-            Filme filme_atual = Filme(
-              tituloController.text,
-              int.parse(duracaoController.text),
-              generoController.text,
-              ano: int.tryParse(anoController.text),
-              faixa_etaria: _ConverterFaixaEtaria(dropdownValue),
-              avaliacao: _rating.toInt(),
-              descricao: descricaoController.text,
-              imageURL: urlController.text,
-            );
-            await dao.save(filme_atual);
-            Navigator.pop(context);
-          }
+            if (_validateInputs()) {
+              Filme filme_atual = Filme(
+                tituloController.text,
+                int.parse(duracaoController.text),
+                generoController.text,
+                ano: int.tryParse(anoController.text),
+                faixa_etaria: _ConverterFaixaEtaria(dropdownValue),
+                avaliacao: _rating.toInt(),
+                descricao: descricaoController.text,
+                imageURL: urlController.text,
+              );
+              
+              await dao.save(filme_atual);
+
+              Navigator.pop(context);
+            }
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         tooltip: 'Salvar',
