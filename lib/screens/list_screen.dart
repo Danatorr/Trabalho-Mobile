@@ -61,18 +61,18 @@ class _ListScreenState extends State<ListScreen> {
                   barrierDismissible: true,
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                        title: Text("Equipe"),
-                        content: const Text(
-                            "Daniel de Araújo Torres\n José Gabriel Gouveia \n Kildere Maravilha \n Rafael Leão \n Vinícius Sobral de Lima"),
-                        actions: [
-                          ElevatedButton(
-                            child: Text("Ok"),
-                            onPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        ],
-                      ));
+                    title: Text("Equipe"),
+                    content: const Text(
+                        "Daniel de Araújo Torres\n José Gabriel Gouveia \n Kildere Maravilha \n Rafael Leão \n Vinícius Sobral de Lima"),
+                    actions: [
+                      ElevatedButton(
+                        child: Text("Ok"),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    ],
+                  ));
             },
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.transparent),
@@ -84,34 +84,34 @@ class _ListScreenState extends State<ListScreen> {
           )
         ],
       ),
-        body: FutureBuilder(
-          future: _fetchMovies(), // Call _fetchMovies directly in the future
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Filme> filmes = snapshot.data as List<Filme>; // Cast data to List<Filme>
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: filmes.map((filme) => MovieCard(filme: filme)).toList(),
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Text("Error fetching movies: ${snapshot.error}");
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
-
+      body: FutureBuilder(
+        future: _fetchMovies(), // Call _fetchMovies directly in the future
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Filme> filmes = snapshot.data as List<Filme>; // Cast data to List<Filme>
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: filmes.map((filme) => MovieCard(filme: filme)).toList(),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text("Error fetching movies: ${snapshot.error}");
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddScreen()),
           );
+          setState(() {});
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
-        tooltip: 'Increment',
+        tooltip: 'Adicionar Filme',
         shape: CircleBorder(),
         child: const Icon(
           Icons.add,
