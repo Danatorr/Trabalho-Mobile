@@ -170,7 +170,7 @@ class ExibirDadosPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(filme.tempoMin.toString()),
+                Text("${(filme.tempoMin/60-0.5).round()}h${filme.tempoMin%60}m"),
                 RatingBar.builder(
                     initialRating: filme.avaliacao,
                     minRating: 1,
