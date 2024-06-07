@@ -131,39 +131,47 @@ class ExibirDadosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalhes do Filme'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          "Detalhes",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.all(15.0),
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Título: ${filme.nome}', style: TextStyle(fontSize: 20)),
-                  Image.network(
-                    filme.imageURL ?? "",
-                    fit: BoxFit.contain,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return Image.network("https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", fit: BoxFit.cover, width: 150);
-                    }
-                  ),
-                  SizedBox(height: 10),
-                  Text(filme.generos, style: TextStyle(fontSize: 16)),
-                  
-                  SizedBox(height: 10),
-                  Text('${filme.ano}', style: TextStyle(fontSize: 16)),
-                  
-                  SizedBox(height: 10),
-                  Text('Duração: ${filme.tempoMin}', style: TextStyle(fontSize: 16)),
-                  
-                  SizedBox(height: 10),
-                  Text('Restrição: ${filme.faixa_etaria}', style: TextStyle(fontSize: 16)),
-                  
-                  RatingBar.builder(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              //Formato Mocado
+                width: 150,
+                height: 300,
+                child: Image.network(
+                  filme.imageURL ?? "",
+                  fit: BoxFit.contain,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Image.network("https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg", fit: BoxFit.cover, width: 150);
+                  }
+                )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(filme.nome),
+                Text(filme.ano.toString()),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(filme.generos),
+                Text("${filme.faixa_etaria} anos"),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(filme.tempoMin.toString()),
+                RatingBar.builder(
                     initialRating: filme.avaliacao,
                     minRating: 1,
                     direction: Axis.horizontal,
@@ -176,16 +184,12 @@ class ExibirDadosPage extends StatelessWidget {
                     ),
                     onRatingUpdate: (rating) {},
                   ),
-
-                  SizedBox(height: 10),
-                  Text('Descrição: ${filme.descricao ?? "Sem descrição"}', style: TextStyle(fontSize: 16)),
-                  // Adicione outros detalhes do filme aqui
-                ],
-              ),
+              ],
             ),
-          ]
-        )
-      )
+            Text(filme.descricao ?? "")
+          ],
+        ),
+      ),
     );
   }
 }
