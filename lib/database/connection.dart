@@ -14,7 +14,7 @@ class Connection {
       tempoMin INT,
       generos TEXT,
       faixa_etaria INT,
-      avaliacao INT,
+      avaliacao DOUBLE,
       descricao TEXT,
       imageURL TEXT
     )

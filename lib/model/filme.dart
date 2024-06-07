@@ -19,7 +19,7 @@ class Filme {
 		tempoMin = ct["tempoMin"] as int;
 		generos = ct["generos"] as String;
 		faixa_etaria = ct["faixa_etaria"] != null ? ct["faixa_etaria"] as int : 0;
-		avaliacao = ct["avaliacao"] != null ? ct["avaliacao"] as double : 0;
+		avaliacao = ct["avaliacao"] != null ? double.parse(ct["avaliacao"].toString()) : 0.0;
 		descricao = ct["descricao"] as String?;
 		imageURL = ct["imageURL"] as String?;
 	}
