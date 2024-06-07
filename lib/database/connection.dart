@@ -26,7 +26,18 @@ class Connection {
 
         return openDatabase(path, onCreate: (db, version) {
             db.execute(createTbFilmes);
-        }, 
+            db.insert(tableName, {
+                "id": 1,
+                "nome": "Dragon Ball Super: Broly",
+                "ano": 2018,
+                "tempoMin": 100,
+                "generos": "Fantasia, Aventura, Anime",
+                "faixa_etaria": 10,
+                "avaliacao": 4.0,
+                "descricao": "Luta de Gogeta vs Broly",
+                "imageURL": "https://upload.wikimedia.org/wikipedia/pt/thumb/a/a1/Doragon_b%C3%B4ru_ch%C3%B4_Buror%C3%AE.jpg/243px-Doragon_b%C3%B4ru_ch%C3%B4_Buror%C3%AE.jpg",
+            });
+        },
         //onOpen: (db) => {
         //  db.delete(tableName)
         //},
